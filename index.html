@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/21f8e7ded6.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #container{
+            /* border: 1px solid red; */
+            height: 60vh;
+            margin: auto;
+            margin-block: 3rem;
+            position: relative;
+            /* background-image: url('https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=400');
+            background-size: 100% 100%; */
+            display: flex;
+            
+        }
+        img{
+            width: 25%;
+            height: 100%;
+            transform: translateX(0);
+            opacity: 0.6;
+            transition:transform 1s linear;
+        }
+        img:hover{
+            transform:translateX(-300);
+        }
+        i{
+            font-size: 5rem;
+            opacity: 0.8;
+            position: absolute;
+            top: 30%;
+            z-index: 100;
+            color: white;
+        }
+
+        .fa-chevron-left{
+            left:5%;
+        }
+
+        .fa-chevron-right{
+            right: 5%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <i class="fa-solid fa-chevron-left"></i>
+    <i class="fa-solid fa-chevron-right"></i>
+</body>
+</html>
+<script>
+
+        let images = [
+            'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&w=400',
+            'https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=400',
+            'https://images.pexels.com/photos/36478/amazing-beautiful-beauty-blue.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+        ]
+
+        let container = document.getElementById('container');
+        appendImages(images);
+
+        function appendImages(images){
+            images.forEach((e, i)=>{
+                let img = document.createElement('img');
+                img.src = e;
+                let mid = Math.floor(images.length/2);
+                if(i==mid){
+                    img.style.width = '50%';
+                    img.style.opacity = "1"
+                }
+                // img.style.transform = 'translateX(-300)';
+                 
+
+                container.append(img);  
+            })
+        }
+         
+
+
+        
+
+        // let index = 0;
+        // let img = document.createElement('img');
+        // img.src = images[index];
+        // container.append(img);
+        
+
+        let leftBtn = document.querySelector('.fa-chevron-left');
+        leftBtn.addEventListener('click', ()=>{
+            container.innerHTML = null;
+            
+
+            images.push(images.shift());
+            appendImages(images);
+           
+            
+
+            // if(index == 0){
+            //     index = images.length-1;
+            // }
+            // else{
+            //     index--;
+            // }
+            // console.log(index)
+            // img.src = images[index];
+        })
+
+        let rightBtn = document.querySelector('.fa-chevron-right');
+
+        rightBtn.addEventListener('click', ()=>{
+            container.innerHTML = null;
+            
+            images.unshift(images.pop());
+            appendImages(images);
+
+            // if(index == images.length-1)
+            //     index = 0;
+            // else
+            //     index++;
+            // console.log(index)
+            // img.src = images[index];
+        })
+        
+       
+
+</script>
